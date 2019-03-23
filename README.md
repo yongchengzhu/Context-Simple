@@ -247,4 +247,18 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
     }
     ```
 
-16. 
+16. Right now the only problem we have is that the default value inside of our Context Object is fixed. To change the context value, we need to create a component called 'Provider' and wire it up inside App component. Inside App.js:
+
+    ```jsx
+    import LanguageContext from '../contexts/LanguageContext';
+    
+    class App extends React.Component {
+      ...
+      <LanguageContext.Provider value={this.state.language}>
+        <UserCreate />
+      </LanguageContext.Provider>
+      ...
+    }
+    ```
+
+    Now our texts inside Field and Button components change whenever the state property value gets changed.
