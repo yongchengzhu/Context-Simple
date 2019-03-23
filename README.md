@@ -285,3 +285,49 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
 
     **Question**: Why do we want to use Consumer instead of this.context?
 
+    **Answer**: We would want to make use of Consumer whenever we want to get information out of multiple different context objects inside of a single components. In contrast, we would want to use contextType whenever we are accessing a single Context Object within a component.
+
+18. To illustrate this concept, let's create a new Context Object `src/contexts/ColorContext.js`.
+
+    ```jsx
+    import React from 'react'
+    
+    // We don't need to have a default value, since we are going to pass in the value
+    // from the Provider.
+    export default React.createContext();
+    ```
+
+    Wire this new Context Object up in App component.
+
+    ```jsx
+    import ColorContext from '../contexts/ColorContext';
+    
+    ...
+      <ColorContext.Provider value="red">
+        <LanguageContext.Provider value={this.state.language}>
+          <UserCreate />
+        </LanguageContext.Provider>
+      </ColorContext.Provider>
+    ...
+    ```
+
+    Inside the Button component, we want to use the Consumer to access the value inside of ColorContext, and then change the class name of the button.
+
+    ```jsx
+    import ColorContext from '../contexts/ColorContext';
+    
+    ...
+      <ColorContext.Consumer>
+        {(color) => 
+          <button className={`ui button ${color}`}>
+            {/* {text} */}
+            <LanguageContext.Consumer>
+              {(value) => this.renderSubmit(value)}
+            </LanguageContext.Consumer>
+          </button>
+        }
+      </ColorContext.Consumer>
+    ...
+    ```
+
+    Alternatively, we can clean up the nasty code with a helper method by passing in 'color' as argument.
