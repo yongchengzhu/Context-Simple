@@ -12,6 +12,8 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
 
 [Initial Setup](#initial-setup)
 
+[Replace Redux](replace-redux)
+
 
 
 ### Initial Setup
@@ -331,3 +333,43 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
     ```
 
     Alternatively, we can clean up the nasty code with a helper method by passing in 'color' as argument.
+
+### Replace Redux
+
+| Redux                                              | Context                                 |
+| -------------------------------------------------- | --------------------------------------- |
+| Distributes data to various components.            | Distributes data to various components. |
+| Centralize data in a store.                        |                                         |
+| Provides mechanism for changing data in the store. |                                         |
+
+1. Create a component called 'LanguageSelector'. The jsx inside render() came from App.js.
+
+   ```jsx
+   import React from 'react';
+   
+   class LanguageSelector extends React.Component {
+     render () {
+       return (
+         <div>
+           Select a language:
+           <i className="flag us" onClick={() => this.props.onLanguageChange('english')} />
+           <i className="flag nl" onClick={() => this.props.onLanguageChange('dutch')} />
+         </div>
+       );
+     }
+   }
+   
+   export default LanguageSelector;
+   ```
+
+   Now inside App.js, remove the language selection jsx that's already inside LanguageSelector, and pass onLanguageSubmit as a prop to LanguageSelector.
+
+   ```jsx
+   import LanguageSelector from './LanguageSelector';
+   
+   ...
+     <LanguageSelector onLanguageChange={this.onLanguageChange} />
+   ...
+   ```
+
+   
