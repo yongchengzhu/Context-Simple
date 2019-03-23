@@ -262,3 +262,26 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
     ```
 
     Now our texts inside Field and Button components change whenever the state property value gets changed.
+
+    **Note:** Each separate use of LanguageContext creates a new, separate 'pipe' of information.
+
+17. The second way we can get information out of the Context Object is by creating the Consumer component. In the Button component, remove the contextType declaration, because contextType is only needed when we are getting information out of the Context Object via `this.context`. Also remove the `const text` declaration since we no longer have access to `this.context`.
+
+    ```jsx
+    class Button extends React.Component {
+      renderSubmit(value) {
+        return value === 'english'? 'Submit' : 'Voorleggen';
+      }
+        
+      ...
+      
+        <LanguageContext.Consumer>
+          {(value) => this.renderSubmit(value)}
+        </LanguageContext.Consumer>
+      
+      ...
+    }
+    ```
+
+    **Question**: Why do we want to use Consumer instead of this.context?
+
