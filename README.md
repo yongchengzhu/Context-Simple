@@ -113,4 +113,74 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
    }
    ```
 
+9. Create the UserCreate component.
+
+   ```jsx
+   import React from 'react';
+   import Field from './Field';
+   import Button from './Button';
+   
+   const UserCreate = () => {
+     return (
+       <div className="ui form">
+         <Field />
+         <Button />
+       </div>
+     );
+   }
+   
+   export default UserCreate;
+   ```
+
+   Create the Field component.
+
+   ```jsx
+   import React from 'react';
+   
+   class Field extends React.Component {
+     render() {
+       return (
+         <div className="ui field">
+           <label>Name</label>
+           <input />
+         </div>
+       );
+     }
+   }
+   
+   export default Field;
+   ```
+
+   Create the Button component.
+
+   ```jsx
+   import React from 'react';
+   
+   class Button extends React.Component {
+     render() {
+       return (
+         <button className="ui button primary">Submit</button>
+       );
+     }
+   }
+   
+   export default Button;
+   ```
+
+   Call an instance of the UserCreate component in App component.
+
+   ```jsx
+   render() {
+       return (
+           <div className="ui container">
+               <div>
+                   Select a language:
+                   <i className="flag us" onClick={() => this.onLanguageChange('english')} />
+                   <i className="flag nl" onClick={() => this.onLanguageChange('dutch')} />
+               </div>
+               <UserCreate />
+           </div>
+       );
+   ```
+
    
