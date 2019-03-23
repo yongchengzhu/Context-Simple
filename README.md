@@ -218,3 +218,33 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
     ```
 
     Now that we have added a reference of contextType to our ContextObject to our component class, our component class can now reference `this.context`, and get access to the data inside of that Context Object. If we `console.log(this.context)`, we will see that it return `'english'` in the console.
+
+14. Inside of the Button component, let's change the text of the button based upon the current context value. Since we only have two languages we can easily write a ternary operation to do this.
+
+    ```jsx
+    render() {
+        const text = this.context === 'english'? 'Submit' : 'Voorleggen';
+    
+        return (
+            <button className="ui button primary">{text}</button>
+        );
+    }
+    ```
+
+15. Inside of the Field component, let's do the same thing.
+
+    ```jsx
+    import LanguageContext from '../contexts/LanguageContext';
+    
+    class Field extends React.Component {
+      static contextType = LanguageContext;
+    
+      render() {
+        ...
+        <label>{text}</label>
+        ...
+      }
+    }
+    ```
+
+16. 
