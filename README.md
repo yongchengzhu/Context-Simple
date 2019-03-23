@@ -12,7 +12,7 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
 
 [Initial Setup](#initial-setup)
 
-[Replace Redux](replace-redux)
+[Replace Redux](#replace-redux)
 
 
 
@@ -369,6 +369,52 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
    
    ...
      <LanguageSelector onLanguageChange={this.onLanguageChange} />
+   ...
+   ```
+
+   The LanguageSelector acts like an action-creator to change the state object inside App.
+
+2. If we want to replace redux with context system, we need to be able to separate the 'view logic' from 'business logic'. We can create a new component called 'LanguageStore' which contains all of our business logic. It would also implement a Provider so that it can share information with any nested child component.
+
+   Inside of LanguageContext.js,
+
+   ```jsx
+   const Context = React.createContext('english');
+   
+   export class LanguageStore extends React.Component {
+     state = { language = 'english' };
+   
+     onLanguageChange = (language) => {
+       this.setState({ language });
+     }
+   
+     render() {
+       return (
+         <Context.Provider value={{ ...this.state, onLanguageChange }}>
+           {/* this.props.children has access to all the jsx nested inside of a component as props. */}
+           {this.props.children}
+         </Context.Provider>
+       );
+     }
+   }
+   
+   export default Context;
+   ```
+
+3. Inside of App, let's try to make use of LanguageStore.
+
+   ```jsx
+   // import LanguageContext from '../contexts/LanguageContext';
+   import { LanguageStore } from '../contexts/LanguageContext';
+   
+   ...
+   
+   <LanguageStore>
+     <LanguageSelector />
+     <ColorContext.Provider value="red">
+       <UserCreate />
+     </ColorContext.Provider>
+   </LanguageStore>
    ...
    ```
 
