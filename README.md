@@ -14,6 +14,8 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
 
 [Replace Redux](#replace-redux)
 
+[Conclusion](#conclusion)
+
 
 
 ### Initial Setup
@@ -453,6 +455,14 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
    </LanguageContext.Consumer>
    ```
 
-   
+### Conclusion
 
-   
+| Redux                                       | Context                                                      |
+| ------------------------------------------- | ------------------------------------------------------------ |
+| Excellent documentation                     | No need for an extra library                                 |
+| Well-known design patterns                  | Hard to build a 'store' component with cross cutting concerns |
+| Tremendous amount of open source libraries. |                                                              |
+
+In Redux, we can always get access to the redux store even inside the action-creators. In a Context Object, it would be very hard to reach into another store and get data out of it. We would need to pass in callbacks.
+
+Redux is better.
