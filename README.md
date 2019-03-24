@@ -418,4 +418,25 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
    ...
    ```
 
+   We are wrapping LanguageSelector and UserCreate inside of LanguageStore, because they need to access to the language state property inside of the store. (Note: recall it is the nested children inside of UserCreate that needs to access the state, not the UserCreate.)
+
+4. Let's wire up a callback function inside of LanguageSelector, so that it can update the currently selected language through LanguageStore.
+
+   ```jsx
+   import LanguageContext from '../contexts/LanguageContext';
+   
+   ...
+   static contextType = LanguageContext;
+   ...
+   ```
+
+   Now, `this.context` contains the state object and the callback function from the store. Pass in the callback function to the onClick property of both icons.
+
+   ```jsx
+   ...
+     <i className="flag us" onClick={() => this.context.onLanguageChange('english')} />
+     <i className="flag nl" onClick={() => this.context.onLanguageChange('dutch')} />
+   ...
+   ```
+
    
