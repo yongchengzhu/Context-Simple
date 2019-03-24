@@ -439,4 +439,20 @@ The app will have 4 components: App, UserCreate, Field, and Button. The user sel
    ...
    ```
 
+5. Now let's move on to the Field component. It needs to be able to reach into the Context Object to grab the currently selected language. It just needs a tiny bit of change to:
+
+   ```jsx
+   const text = this.context.language === 'english'? 'Name' : 'Naam';
+   ```
+
+   Same thing for the Button component:
+
+   ```jsx
+   <LanguageContext.Consumer>
+     {({ language }) => this.renderSubmit(language)}
+   </LanguageContext.Consumer>
+   ```
+
+   
+
    
